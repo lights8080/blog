@@ -1,0 +1,13 @@
+<div class="widget">
+    <h3 class="widget-title"><%= __('widget.board') %></h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <%- theme.site.board %>
+            </div>
+            <div class="content">
+                <img src="<%- url_for(theme.site.qrcode) %>" alt="<%= __('site.qrcode_alt') %>" title="<%= __('site.qrcode_title') %>" />
+            </div>
+        </div>
+    </div>
+</div>
