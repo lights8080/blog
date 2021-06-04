@@ -10,7 +10,7 @@ tags:
 - Elasticsearch
 ---
 
-> Elasticsearch索引介绍，包括索引设置、索引模板、索引生命周期管理、翻滚索引。
+> Elasticsearch索引介绍，包括索引设置、索引模板、索引生命周期管理、翻滚索引、索引别名、滚动索引。
  基于7.11版本。
 <!-- more -->
 
@@ -53,6 +53,47 @@ tags:
 * 如果显式设置创建索引，并且该索引与索引模板匹配，则创建索引请求中的设置将优先于索引模板中指定的设置。
 * 索引模板仅在创建索引期间应用。索引模板的更改不会影响现有索引。
 * 当可组合模板匹配给定索引时，它始终优先于旧模板。如果没有可组合模板匹配，则旧版模板可能仍匹配并被应用。
+
+### 示例
+```sh
+PUT _template/datastream_template
+{
+  # 1.1 匹配所有"datastream-"开头的索引
+  "index_patterns": ["datastream-*"],
+  # 2 指定创建数据流索引模板
+  "data_stream": {},
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0,
+    "refresh_interval": "15s",
+    # 指定索引管理策略，索引关联策略
+    "index.lifecycle.name": "datastream_policy",
+    # 指定滚动写别名
+    "index.lifecycle.rollover_alias": "datastream",
+    # 满足策略的索引检查频率
+    "indices.lifecycle.poll_interval": "10m",
+    # 跳过滚动
+    "index.lifecycle.indexing_complete": true
+  },
+  "mappings": {
+    "dynamic_date_formats": [
+      "yyyy-MM-dd HH:mm:ss",
+      "yyyy-MM-dd HH:mm:ss Z",
+      "yyyy-MM-dd HH:mm:ss.SSS",
+      "yyyy-MM-dd HH:mm:ss.SSS Z"
+    ],
+    "_default_": {
+      "_all": {
+        "enabled": false
+      }
+    }
+  },
+  # 1.2 非数据流索引是使用
+  "aliases": {
+    "last_3_months": {} 
+  }
+}
+```
 
 ## 索引生命周期管理（Index Lifecycle Manager - ILM）
 配置索引生命周期管理策略，能够随着时间推移根据性能、弹性和保留要求自动的管理索引。
@@ -128,10 +169,114 @@ ILM定期运行，检查索引是否符合策略标准，并执行所需的步�
 ILM使您能够根据索引大小，文档数或使用年限自动翻转到新索引。触发翻转后，将创建一个新索引，将写入别名更新为指向新索引，并将所有后续更新写入新索引。
 与基于时间的过渡相比，基于大小，文档数或使用年限翻转至新索引更可取。在任意时间滚动通常会导致许多小的索引，这可能会对性能和资源使用产生负面影响。
 
+### 示例
+```sh
+# 查看索引所处哪个阶段、应用策略等
+GET datastream-*/_ilm/explain
+# 创建索引管理策略
+PUT _ilm/policy/full_policy
+{
+  "policy": {
+    "phases": {
+      "hot": {
+        "actions": {
+          "rollover": {
+            "max_age": "7d",
+            "max_size": "50G"
+          }
+        }
+      },
+      "warm": {
+        "min_age": "30d",
+        "actions": {
+          "forcemerge": {
+            "max_num_segments": 1
+          },
+          "shrink": {
+            "number_of_shards": 1
+          },
+          "allocate": {
+            "number_of_replicas": 2
+          }
+        }
+      },
+      "cold": {
+        "min_age": "60d",
+        "actions": {
+          "allocate": {
+            "require": {
+              "box_type": "cold"
+            }
+          }
+        }
+      },
+      "delete": {
+        "min_age": "90d",
+        "actions": {
+          "delete": {}
+        }
+      }
+    }
+  }
+}
+```
+
 ## 数据流（Data streams）
 数据流用于跨多个索引存储仅追加的时间序列数据，同时提供一个用于请求的数据流名称。
 可以将索引和搜索请求直接提交到数据流。流自动将请求路由到存储流数据的索引。同样可以使用索引生命周期管理（ILM）来自动管理这些后备索引。
 数据流非常适合日志，事件，指标和其他连续生成的数据。
+
+## 索引别名（index alias）
+
+#### Request body
+* actions：必填，要执行的一组动作
+  * add：添加一个索引别名
+  * remove：删除一个索引别名
+  * remove_index：删除索引
+
+actions on alias objects：
+* index：指定索引名称，允许逗号分隔或通配符
+* alias：指定别名名称，允许逗号分隔或通配符
+* filter：使用别名查询时，限制条件
+* is_write_index：标记作为别名的写索引，一个别名同时只能有一个写索引
+* routing：指定路由到特定分片
+* search_routing：搜索路由
+* index_routing：索引路由
+
+### 示例
+```sh
+PUT /<index>/_alias/<alias>
+DELETE /<index>/_alias/<alias>
+GET /_alias
+GET /_alias/<alias>
+GET /<index>/_alias/<alias>
+
+POST /_aliases
+{
+    "actions": [
+        {
+            "remove": {
+                "index": "test1",
+                "alias": "alias1"
+            }
+        },
+        {
+            "add": {
+                "index": "test",
+                "alias": "alias1",
+                "is_write_index": false
+            }
+        },
+        {
+            "add": {
+                "index": "test2",
+                "alias": "alias1",
+                "is_write_index": true
+            }
+        }
+    ]
+}
+```
 
 ## 滚动索引（rollover index）
 当现有的索引满足您提供的条件（a list of conditions）时，滚动索引API会为滚动目标（rollover target）创建一个新的索引。
@@ -139,25 +284,52 @@ ILM使您能够根据索引大小，文档数或使用年限自动翻转到新�
 当滚动目标是数据流（data stream）时，新索引会成为数据流的写索引，并生成一个增量
 
 ### Rollover request
-```
+```sh
 POST /<rollover-target>/_rollover/<target-index>
 POST /<rollover-target>/_rollover/
 ```
 
-#### Path parameters
-* <rollover-target>：必填，现有的分配给目标索引的索引别名或数据流名称。
-* <target-index>：可选，用于创建和分配索引别名的目标索引名称。如果<rollover-target>是数据流，则不允许使用此参数。如果<rollover-target>是索引别名，则分配给以"-"和数字结尾的索引名称，如logs-000001。
+滚动索引接受一个滚动目标（rollover target）和一个条件列表（a list of conditions）。可以使用API撤销太大或太旧的索引。
 
-#### Request body
-* aliases：可选，索引别名
-* conditions：可选，滚动操作的触发条件
-  * max_age：最大年龄
-  * max_docs：最大文档数
-  * max_size：最大索引大小
-* mappings：可选，映射配置
-* settings：可选，索引配置
+当满足滚动条件，滚动请求在不同的场景下，滚动操作有所不同：
+* 如果滚动目标是别名指向单个索引时：
+1. 创建新索引
+2. 别名指向新索引
+3. 原始索引中移除别名
 
+* 如果滚动目标是别名指向多个索引时，必须有一个索引设置`is_write_index=true`：
+1. 创建新索引
+2. 设置新索引is_write_index=true
+3. 设置原始索引is_write_index=false
 
+* 如果滚动目标是数据流：
+1. 创建新索引
+2. 在数据流上添加新索引作为支持索引和写索引
+3. 增加数据流的generation属性
 
+### Path parameters
 
+* `<rollover-target>`：必填，现有的分配给目标索引的索引别名或数据流名称。
+* `<target-index>`：可选，用于创建和分配索引别名的目标索引名称。如果`<rollover-target>`是数据流，则不允许使用此参数。如果`<rollover-target>`是索引别名，则分配给以"-"和数字结尾的索引名称，如logs-000001。
+
+### 示例
+```sh
+PUT /logs-000001
+{
+  "aliases": {
+    "logs_write": {}
+  }
+}
+
+# Add > 1000 documents to logs-000001
+
+POST /logs_write/_rollover
+{
+  "conditions": {
+    "max_age":   "7d",
+    "max_docs":  1000,
+    "max_size":  "5gb"
+  }
+}
+```
 

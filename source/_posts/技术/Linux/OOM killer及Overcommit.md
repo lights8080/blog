@@ -9,6 +9,9 @@ tags:
 - Linux
 ---
 
+> OOM killer(Out Of Memory killer)是Linux内核的一种内存管理机制，该机制在系统物理内存不足时，选择性杀死一些进程以释放内存，以使系统继续运行。
+<!-- more -->
+
 ## OOM killer
 OOM killer(Out Of Memory killer)是Linux内核的一种内存管理机制，该机制在系统物理内存不足时，选择性（oom_killer遍历当前所有进程，根据进程的内存使用情况进行打分，然后从中选择一个分数最高的进程）杀死一些进程以释放内存，以使系统继续运行。
 

@@ -9,6 +9,10 @@ tags:
 - JVM
 ---
 
+> JVM调优过程。问题背景、分析过程、优化思路
+
+<!-- more -->
+
 # 问题背景
 
 机器负载截图：
@@ -45,7 +49,7 @@ GCT：垃圾回收消耗总时
 * 查看Heap信息
 
 jmap -heap 545592
-![](https://img-blog.csdnimg.cn/img_convert/d49c1e18cf0b371e2a85a37eef830684.png)
+![img](https://img-blog.csdnimg.cn/img_convert/d49c1e18cf0b371e2a85a37eef830684.png)
 
 **结果显示**
 老年代分片空间：OldSize = 65536 (0.0625MB)

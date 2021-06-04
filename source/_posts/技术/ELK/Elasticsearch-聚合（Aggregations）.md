@@ -165,7 +165,7 @@ GET /bank/_search
 
 ### 示例2：条件过滤，多列分组、排序、分页
 ```
-GET /unififi-order/_search
+GET /light-order/_search
 {
   "size": 0,
   "query": {
@@ -183,9 +183,9 @@ GET /unififi-order/_search
       "composite":{
         "sources": [
           {
-            "supplierCid": {
+            "cid": {
               "terms": {
-                "field": "supplierCid"
+                "field": "cid"
               }
             }
           },{
@@ -199,9 +199,9 @@ GET /unififi-order/_search
         "size": 50
       },
       "aggs": {
-        "sum_totalApiAmount": {
+        "sum_totalAmount": {
           "sum": {
-            "field": "totalApiAmount"
+            "field": "totalAmount"
           }
         },
         "order_count": {

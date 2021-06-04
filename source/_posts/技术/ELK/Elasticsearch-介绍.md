@@ -10,7 +10,7 @@ tags:
 - Elasticsearch
 ---
 
-> Elasticsearch介绍，包括文档与索引、倒排索引、搜索和分析、可伸缩和弹性（节点、分片、跨集群复制）。
+> Elasticsearch介绍，包括文档与索引、倒排索引、搜索和分析、可伸缩和弹性（节点、分片、跨集群复制）、常用场景。
  内容大部分源自官方文档第一节“What is Elasticsearch?”
  基于7.11版本。
 <!-- more -->
@@ -107,3 +107,16 @@ Elasticsearch索引只是一个或多个物理分片的逻辑分组，其中每�
 出于性能原因，群集中的节点必须位于同一网络上，跨不同数据中心中的节点在群集中平衡分片的时间太长了。但是这不符合高可用架构的要求，跨群集复制(CCR)可以解决单个集群重大故障问题。
 
 CCR提供了一种将主集群的索引自动同步到次要远程集群的方法，次要远程集群可以作为热备份。如果主集群失败，次要集群可以接管。您还可以使用CCR创建次要集群，以满足用户在地理位置上接近的读请求。主集群上的索引是Leader，负责所有写请求，复制到次要集群上的索引是只读的Follower。
+
+
+## 4. 常用场景
+* 根据关键字查询日志详情
+* 监控系统的运行状况
+* 统计分析，比如接口的调用次数、执行时间、成功率等
+* 异常数据自动触发消息通知
+* 基于日志的数据挖掘
+
+## 参考
+
+[看完这篇还不会Elasticsearch，我跪搓衣板！](https://mp.weixin.qq.com/s?__biz=MjM5ODI5Njc2MA==&mid=2655825578&idx=1&sn=ae7619297d4bd257577b73247ae4b171&chksm=bd74e37d8a036a6bb2b559133ed8bc52db5373014ef20f780a38eebff2d933083269c8b98e49&scene=0&xtrack=1&key=66db761f362a769de5d38c391cbd20283fe3c7b12ac6a8a999aad26d5735aa00e5e14411f621e08a10446705f4d8e18da363dd6c789ec747ade6ef53459d4d889e1510d524aaa711daed23614fb5af0f&ascene=0&uin=MzYyMjM3MDc1&devicetype=iMac+MacBookPro11%2C4+OSX+OSX+10.12.3+build(16D30)&version=12020810&nettype=WIFI&lang=zh_CN&fontScale=100&pass_ticket=FogHXXVrph9lnvlFILk0hR3sqAERHB6%2BvhNTuk8WAZb%2FnRr7vB8DqFN18ZWu3F0%2F)
+[一篇文章带你搞定 ElasticSearch 术语](https://www.cnblogs.com/wupeixuan/p/12375031.html)

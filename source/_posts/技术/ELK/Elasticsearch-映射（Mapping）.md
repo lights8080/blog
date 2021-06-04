@@ -124,3 +124,94 @@ tags:
 * index.mapping.depth.limit: 字段的最大深度，默认20
 * index.mapping.nested_fields.limit: 单个索引中嵌套类型（nested）最大数限制，默认50
 * index.mapping.nested_objects.limit: 单个文档中嵌套JSON对象的最大数限制，默认10000
+
+## 其他
+### object与nested区别
+如果需要为对象数组建立索引并保持数组中每个对象的独立性，应该使用nested类型而不是object类型。
+
+```sh
+PUT my_index/_doc/1
+{
+  "group" : "fans",
+  "user" : [ 
+    {
+      "first" : "John",
+      "last" :  "Smith"
+    },
+    {
+      "first" : "Alice",
+      "last" :  "White"
+    }
+  ]
+}
+```
+
+ES内部会转换成这样的对象：
+```sh
+{
+  "group" :        "fans",
+  "user.first" : [ "alice", "john" ],
+  "user.last" :  [ "smith", "white" ]
+}
+```
+
+### multi-fields（多字段不同的目的）
+为了不同的目的，以不同的方式对同一个字段进行索引
+https://www.elastic.co/guide/en/elasticsearch/reference/7.11/multi-fields.html
+https://stackoverflow.com/questions/42383341/full-text-search-as-well-as-terms-search-on-same-filed-of-elasticsearch
+
+```sh
+PUT my_index
+{"mappings":{"properties":{"city":{"type":"text","fields":{"raw":{"type":"keyword"}}}}}}
+```
+
+### 示例
+
+```sh
+PUT my_index
+{
+    "mappings": {
+        "dynamic_templates": [
+            {
+                "strings_as_keywords": {
+                    "match_mapping_type": "string",
+                    "mapping": {
+                        "type": "keyword",
+                        "ignore_above": 1024
+                    }
+                }
+            },
+            {
+                "unindexed_longs": {
+                    "match_mapping_type": "long",
+                    "mapping": {
+                        "type": "long",
+                        "index": false
+                    }
+                }
+            }
+        ],
+        "properties": {
+            "@timestamp": {
+                "type": "date"
+            },
+            "message": {
+                "type": "text",
+                "index": false
+            },
+            "log": {
+                "properties": {
+                    "file": {
+                        "properties": {
+                            "path": {
+                                "type": "text",
+                                "index": false
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```

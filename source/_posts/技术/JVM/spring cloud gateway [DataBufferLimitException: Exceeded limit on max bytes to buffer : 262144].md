@@ -9,6 +9,11 @@ tags:
 - JVM
 ---
 
+> DataBufferLimitException: Exceeded limit on max bytes to buffer : 262144
+> 问题背景、分析过程、解决办法
+
+<!-- more -->
+
 # 问题背景
 线上环境spring cloud gateway偶尔遇到如下异常：
 DataBufferLimitException: Exceeded limit on max bytes to buffer : 262144
