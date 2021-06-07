@@ -1,6 +1,6 @@
 ---
 title: "Linux [buff/cache]内存缓存占用过高分析和优化"
-date: 2021-05-19 00:00:00
+date: 2021-05-19
 categories:
 - 技术
 - Linux

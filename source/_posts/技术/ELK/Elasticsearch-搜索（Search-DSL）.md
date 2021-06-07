@@ -1,6 +1,6 @@
 ---
 title: Elasticsearch-搜索（Search-DSL）
-date: 2021-04-08 11:27:15
+date: 2021-04-08
 categories:
 - 技术
 - ELK
@@ -23,6 +23,7 @@ tags:
 * Retrieve selected fields（查询指定字段）
 * Sort search results（排序）
 * Run an async search（异步搜索）
+
 本文介绍其中的Query DSL。
 
 ## 查询特定语言（Query DSL - Domain Specific Language）

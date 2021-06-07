@@ -1,6 +1,6 @@
 ---
 title: Logstash-配置
-date: 2021-03-22 11:27:15
+date: 2021-03-22
 categories:
 - 技术
 - ELK

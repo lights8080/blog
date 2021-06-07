@@ -1,6 +1,6 @@
 ---
 title: Elasticsearch-映射（Mapping）
-date: 2021-04-01 11:27:15
+date: 2021-04-01
 categories:
 - 技术
 - ELK

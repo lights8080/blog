@@ -1,5 +1,5 @@
 ---
-title: ELK-实践总结
+title: ELK-实践（数据模型&配置过程）
 date: 2021-06-04
 categories:
 - 技术
@@ -9,12 +9,28 @@ tags:
 - ELK
 ---
 
-> ELK体现实践总结。包括Elasticsearch的映射和索引、Logstash规则、Filebeat规则、同步ES数据脚本、踩坑及小技巧
+> 介绍基于业务的数据规模和配置过程（Elasticsearch的映射和索引、Logstash配置管理、Filebeat规则管理、同步脚本等）。
 基于7.11版本。
 
 <!-- more -->
 
-## Elasticsearch 映射和索引
+业务中Elasticsearch数据分为两类：
+
+* 日志类：数据线性增长，无修改操作，无主键，数据价值随时间递减。如：用户操作、异常信息等
+
+* 业务类：有主键，允许修改删除，长期保留。如：订单信息、基础信息
+
+
+
+数据提取方式和特点：
+
+日志类数据：Filebeat->Logstash->Elasticsearch。数据流、通用模型、容错性强
+
+业务类数据：通过脚本获取数据信息（数据库、API等）直接更新到Elasticsearch。自定义灵活可控
+
+![](https://gitee.com/lights8080/lights8080-oss/raw/master/2021/06/vgIs47.png)
+
+## 1. Elasticsearch 映射和索引
 
 * lights-mappings：组件模板mappings
 * lights-settings：组件模板settings
@@ -145,7 +161,7 @@ POST /_index_template/lights-service-exception
             "number_of_shards": 1,
             "number_of_replicas": 0,
             "refresh_interval": "15s",
-            "index.lifecycle.name": "lights-data"
+            "index.lifecycle.name": "lights-log-30"
         }
     },
     "priority": 100,
@@ -264,7 +280,11 @@ POST /_index_template/lights-order
 }
 ```
 
-## Logstash Config
+## 2. Logstash Config
+
+1. 通过Filebeat标签识别日志类型
+2. 根据具体的服务名称打上业务标签，过滤、处理数据
+3. 根据不同的业务标签，输出到不同的Elasticsearch索引
 
 config/lights.conf
 ```yaml
@@ -392,8 +412,7 @@ output {
 }
 ```
 
-
-## Filebeat
+## 3.1 Filebeat
 
 ```yaml
 # Nginx日志
@@ -419,11 +438,11 @@ output {
   ignore_older: 6h
 ```
 
-## 脚本：同步到Elasticsearch
+## 3.2 脚本（同步到Elasticsearch）
 
 ```sh
 #!/bin/bash
-# 判断是否有任务在执行
+# 判断脚本正在执行
 LOCK=$(cat $es_script_path/.lock_$file_suffix)
 if [ $LOCK -eq 1 ];then
    echo "`date "+%Y-%m-%d %H:%M:%S"` locked" && exit 1
@@ -452,33 +471,33 @@ do
     # 时区设置
     cat $es_script_path/.data_$file_suffix |jq '.orderInfo' -c >$es_script_path/.data_1_$file_suffix
     sed -i 's/[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\} [0-9]\{2\}:[0-9]\{2\}:[0-9]\{2\}/& +0800/g' $es_script_path/.data_1_$file_suffix
-    # 保持到ES
+    # 保持到Elasticsearch
     curl -XPOST --user 'elastic:<password>' -H "Content-Type: application/json" http://localhost:9200/$es_index/_doc/$LINE -d@$es_script_path/.data_1_$file_suffix
   fi
 done
 
-# 更新同步时间 及 解锁
+# 更新同步时间 及 解除正在执行标记
 echo $DATE_END > $es_script_path/.lasttime_$file_suffix
 echo "0" > $es_script_path/.lock_$file_suffix
 ```
 
 
-## 小技巧
+## 4. 其他
 
 #### 1. Logstash Req-Resp合并成一条事件
 
 正常情况下Controller层会拦截请求参数和响应结果并输出到日志，如何基于线程ID将前后两条日志记录合并到一个事件中。
 
-```json
-if [service_name] == "light-order-service" and [message] =~ "LIGHT-RE" and [message] =~ " INFO " {
+```yaml
+if [service_name] == "lights-order-service" and [message] =~ "LIGHTS-RE" and [message] =~ " INFO " {
     grok {
         match => {
             "message" => [
-                "%{TIMESTAMP_ISO8601:timestamp} \[%{DATA:thread}\] %{DATA:level} - LIGHT-%{DATA:type}-\[%{DATA:class_method}\] \[%{DATA:username}\] \[%{GREEDYDATA:request}\]",
-                "%{TIMESTAMP_ISO8601:timestamp} \[%{DATA:thread}\] %{DATA:level} - LIGHT-%{DATA:type}-\[%{DATA:class_method}\] %{GREEDYDATA:response} size:%{DATA:size} spend:%{DATA:spend}ms"
+                "%{TIMESTAMP_ISO8601:timestamp} \[%{DATA:thread}\] %{DATA:level} - LIGHTS-%{DATA:type}-\[%{DATA:class_method}\] \[%{DATA:username}\] \[%{GREEDYDATA:request}\]",
+                "%{TIMESTAMP_ISO8601:timestamp} \[%{DATA:thread}\] %{DATA:level} - LIGHTS-%{DATA:type}-\[%{DATA:class_method}\] %{GREEDYDATA:response} size:%{DATA:size} spend:%{DATA:spend}ms"
             ]
         }
-        id => "light-order-service"
+        id => "lights-order-service"
     }
     if [type] == "REQ" {
         aggregate {
@@ -496,7 +515,7 @@ if [service_name] == "light-order-service" and [message] =~ "LIGHT-RE" and [mess
             timeout => 120
         }
         mutate {
-            add_tag => [ "light-order-service" ]
+            add_tag => [ "lights-order-service" ]
             remove_field => ["message"]
         }
     }
@@ -530,7 +549,7 @@ curl -XPOST --user 'elastic:xxx' -H "Content-Type: application/json" http://127.
 
 * Kibana搜索时带上时区
 ```json
-GET light-order/_count
+GET lights-order/_count
 {
   "query": {
     "range": {

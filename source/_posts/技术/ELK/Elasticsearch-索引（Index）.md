@@ -1,6 +1,6 @@
 ---
 title: Elasticsearch-索引（Index）
-date: 2021-04-07 11:27:15
+date: 2021-04-07
 categories:
 - 技术
 - ELK

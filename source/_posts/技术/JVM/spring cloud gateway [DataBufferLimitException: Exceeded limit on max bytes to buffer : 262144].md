@@ -1,6 +1,6 @@
 ---
 title: "spring cloud gateway [DataBufferLimitException: Exceeded limit on max bytes to buffer : 262144]"
-date: 2021-02-04 00:00:00
+date: 2021-02-04
 categories:
 - 技术
 - JVM

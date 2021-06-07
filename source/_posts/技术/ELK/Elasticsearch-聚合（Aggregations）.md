@@ -1,6 +1,6 @@
 ---
 title: Elasticsearch-聚合（Aggregations）
-date: 2021-04-25 11:27:15
+date: 2021-04-25
 categories:
 - 技术
 - ELK
@@ -165,7 +165,7 @@ GET /bank/_search
 
 ### 示例2：条件过滤，多列分组、排序、分页
 ```
-GET /light-order/_search
+GET /lights-order/_search
 {
   "size": 0,
   "query": {

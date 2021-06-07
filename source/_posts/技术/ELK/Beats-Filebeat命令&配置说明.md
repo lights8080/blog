@@ -1,6 +1,6 @@
 ---
 title: Beats-Filebeat命令&配置说明
-date: 2021-04-29 11:27:15
+date: 2021-04-29
 categories:
 - 技术
 - ELK
