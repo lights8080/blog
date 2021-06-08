@@ -178,6 +178,44 @@ nohup python3 -m elastalert.elastalert --config ./config.yaml --verbose --rule .
 > 规则类型、配置项、报警配合
 > https://elastalert.readthedocs.io/en/stable/ruletypes.html
 
+### Rule Types
+
+* frequency：频率；在给定时间范围内至少有一定数量的事件时，此规则匹配
+  * num_events：触发警报的事件数
+  * timeframe：事件数必须发生在的此时间段内，触发报警
+  * use_count_query：使用count API轮询Elasticsearch
+* any：过滤器每次匹配都会警报
+* blacklist：黑名单；将对照黑名单检查某个字段，如果该字段在黑名单中，则进行匹配
+  * compare_key： 用于与黑名单进行比较的字段的名称，如果字段为null，那么这些事件将被忽略
+  * blacklist：黑名单值的列表
+* whitelist：白名单；与黑名单类似
+* change：更改；将监视特定字段，并在该字段发生更改时进行匹配
+  * compare_key：要监视更改的字段的名称
+  * ignore_null：如果为true，则没有compare_key字段的事件将不会计为已更改
+  * query_key：对每个query_key的唯一值分别计数。
+  * timeframe: 可选；时间范围，两次更改之间的最长时间。在这段时间之后，ElastAlert将忘记compare_key字段的旧值
+* spike：当事件发生率增加或减少时匹配，它使用两个滑动窗口来比较事件的当前频率和参考频率
+  * spin_height：上一个时间范围与上一个时间范围内的事件数之比，点击该事件将触发警报
+  * spike_type：‘up’, ‘down’ or ‘both’
+  * timeframe：平均出该时间段内的事件发生率
+  * field_value：可选；使用文档中字段的值而不是匹配文档的数量
+  * threshold_ref：参考窗口中必须存在的最少数量的事件才能触发警报
+  * threshold_cur：当前窗口中必须存在的最小数量的事件才能触发警报
+* flatline：当事件总数在一个时间段内低于给定阈值时，此规则匹配
+  * threshold：不触发警报的最小事件数
+  * timeframe：时间范围
+* new_term：当新值出现在以前从未见过的字段中时，此规则匹配
+  * fields：监视字段列表
+* cardinality：当时间范围内某个字段的唯一值的总数大于或小于阈值时，此规则匹配
+  * cardinality_field：要计算基数的字段
+  * timeframe：时间范围
+* metric_aggregation：当计算窗口中的度量值高于或低于阈值时，此规则匹配
+* spike_aggregation：当计算窗口中某个指标的值是spike_height乘以比前一个时间段大或小时，该规则匹配
+* percentage_match：当计算窗口内匹配存储区中的文档百分比高于或低于阈值时，此规则匹配
+
+![IMAGE](https://gitee.com/lights8080/lights8080-oss/raw/master/2021/06/xZ1jbI.jpg)
+
+
 ### 规则配置（Rule Configuration）
 ```yaml
 # Elasticsearch配置
@@ -232,6 +270,8 @@ top_count_keys:
   - "username"
 # 术语的前X个最常用的值，与top_count_keys一同使用
 top_count_number: 5
+# 如果为true，top_count_keys中所有字段都会附加.raw
+raw_count_keys: true
 
 # 单次查询获取的最大文档数
 max_query_size: 10000
@@ -239,9 +279,14 @@ max_query_size: 10000
 use_count_query: false
 # 聚合查询（aggregation），和query_key、doc_type、terms_size一起使用
 use_terms_query: false
-# 为每个值单独计数
-query_key: 
-  - service_name
+
+# 为每个值单独计数（多个逗号分隔，必须配合compound_query_key使用）
+query_key: 'service_name,username'
+# 复合的查询key，必须与query_key一一对应，get_hits_terms时使用
+compound_query_key:
+ - service_name
+ - username
+ 
 doc_type: _doc
 # 桶的最大数
 terms_size: 50
@@ -275,45 +320,10 @@ use_local_time: true
 timestamp_type: 'iso'
 # 自定义时间戳格式
 timestamp_format: '%Y-%m-%dT%H:%M:%SZ'
+# 指定时间字段，默认@timestamp
+timestamp_field: '@timestamp'
 
 ```
-
-### Rule Types
-
-* frequency：频率；在给定时间范围内至少有一定数量的事件时，此规则匹配
-  * num_events：触发警报的事件数
-  * timeframe：事件数必须发生在的此时间段内，触发报警
-  * use_count_query：使用count API轮询Elasticsearch
-* any：过滤器每次匹配都会警报
-* blacklist：黑名单；将对照黑名单检查某个字段，如果该字段在黑名单中，则进行匹配
-  * compare_key： 用于与黑名单进行比较的字段的名称，如果字段为null，那么这些事件将被忽略
-  * blacklist：黑名单值的列表
-* whitelist：白名单；与黑名单类似
-* change：更改；将监视特定字段，并在该字段发生更改时进行匹配
-  * compare_key：要监视更改的字段的名称
-  * ignore_null：如果为true，则没有compare_key字段的事件将不会计为已更改
-  * query_key：对每个query_key的唯一值分别计数。
-  * timeframe: 可选；时间范围，两次更改之间的最长时间。在这段时间之后，ElastAlert将忘记compare_key字段的旧值
-* spike：当事件发生率增加或减少时匹配，它使用两个滑动窗口来比较事件的当前频率和参考频率
-  * spin_height：上一个时间范围与上一个时间范围内的事件数之比，点击该事件将触发警报
-  * spike_type：‘up’, ‘down’ or ‘both’
-  * timeframe：平均出该时间段内的事件发生率
-  * field_value：可选；使用文档中字段的值而不是匹配文档的数量
-  * threshold_ref：参考窗口中必须存在的最少数量的事件才能触发警报
-  * threshold_cur：当前窗口中必须存在的最小数量的事件才能触发警报
-* flatline：当事件总数在一个时间段内低于给定阈值时，此规则匹配
-  * threshold：不触发警报的最小事件数
-  * timeframe：时间范围
-* new_term：当新值出现在以前从未见过的字段中时，此规则匹配
-  * fields：监视字段列表
-* cardinality：当时间范围内某个字段的唯一值的总数大于或小于阈值时，此规则匹配
-  * cardinality_field：要计算基数的字段
-  * timeframe：时间范围
-* metric_aggregation：当计算窗口中的度量值高于或低于阈值时，此规则匹配
-* spike_aggregation：当计算窗口中某个指标的值是spike_height乘以比前一个时间段大或小时，该规则匹配
-* percentage_match：当计算窗口内匹配存储区中的文档百分比高于或低于阈值时，此规则匹配
-
-![IMAGE](https://gitee.com/lights8080/lights8080-oss/raw/master/2021/06/xZ1jbI.jpg)
 
 ### Alerts
 每个规则都可以附加任何数量的警报。每个警报器的选项既可以定义在yaml文件，也可以嵌套在警报名称中，允许同一警报器的多个不同设置。

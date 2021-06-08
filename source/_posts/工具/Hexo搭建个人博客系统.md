@@ -2,7 +2,7 @@
 title: "Hexo搭建个人博客系统"
 date: 2021-06-08
 categories:
-- 其他
+- 工具
 tags:
 - Hexo
 - 效率

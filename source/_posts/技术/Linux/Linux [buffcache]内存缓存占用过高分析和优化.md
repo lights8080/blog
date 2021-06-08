@@ -7,6 +7,7 @@ categories:
 tags:
 - 技术
 - Linux
+- 线上问题处理
 ---
 
 > buff/cache过高问题解决过程。问题现场、问题分析、如何解决、扩展知识
