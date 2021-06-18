@@ -1,6 +1,6 @@
 ---
-title: "ElastAlert-介绍"
-date: 2021-05-19
+title: "ElastAlert-实践"
+date: 2021-06-17
 categories:
 - 技术
 - ELK
@@ -69,8 +69,7 @@ $ python3 ./setup.py install
 # 报错（pip:No module named setuptools_rust）解决办法
 $ pip3 install setuptools-rust
 
-#$ pip3 install "elasticsearch>=5.0.0"
-$ pip3 install elasticsearch==7.0.0
+$ pip3 install "elasticsearch>=5.0.0"
 ```
 
 ### 命令
@@ -81,10 +80,10 @@ $ elastalert-create-index
 # 测试Rule，24小时内以调试模式运行。--config：指定配置文件
 $ elastalert-test-rule example_rules/example_frequency.yaml
 # 或
-$ python3 -m elastalert.elastalert --config ./config.yaml --rule rules/service_exception.yaml --start 2021-05-16T00:00:00+08:00 --debug --es_debug --es_debug_trace trace-20210617.log
+$ python3 -m elastalert.elastalert --config ./config.yaml --rule rules/service_exception.yaml --start 2021-05-16T00:00:00+08:00 --debug --es_debug
 
 # 后台运行
-nohup python3 -m elastalert.elastalert --config ./config.yaml --rule ./your_rule.yaml --verbose >> ./elastalert.log 2>&1 &
+nohup python3 -m elastalert.elastalert --config ./config.yaml --verbose --rule ./your_rule.yaml >> ./elastalert.log 2>&1 &
 ```
 
 #### 测试规则（Testing Rule）
