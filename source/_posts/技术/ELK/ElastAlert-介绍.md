@@ -237,3 +237,4 @@ elastalert_status是ElastAlert在确定其首次开始时要使用的时间范�
 [ElastAlert](https://elastalert.readthedocs.io/en/stable/index.html)
 [elastalert搭建](https://www.cnblogs.com/evescn/p/13098343.html)
 [ElastAlert安装与使用](https://www.jianshu.com/p/e6281cf72e95/)
+[Rule Filters说明](https://elastalert.readthedocs.io/en/stable/recipes/writing_filters.html)

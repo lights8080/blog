@@ -37,7 +37,7 @@ run_every:
 buffer_time:
   minutes: 15
 # ElastAlert将存储数据的索引名称
-writeback_index: elastalert_status
+writeback_index: elastalert
 # 单次查询Elasticsearch最大文档数，默认10000
 max_query_size: 10000
 # 滚动浏览的最大页面数，默认0（表示不限制）
@@ -57,7 +57,7 @@ notify_email:
 # 警报是否包括规则中描述的元数据，默认False
 add_metadata_alert: false
 # 跳过无效的文件而不是退出
-skip_invalid: 
+skip_invalid:
 # 失败警报的重试窗口
 alert_time_limit:
 
