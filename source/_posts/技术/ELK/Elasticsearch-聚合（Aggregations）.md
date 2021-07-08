@@ -209,6 +209,7 @@ GET /lights-order/_search
             "field": "id"
           }
         },
+        # 按order_count排序
         "sales_bucket_sort": {
           "bucket_sort": {
             "sort": [
@@ -216,6 +217,14 @@ GET /lights-order/_search
             ],
             "from": 0, 
             "size": 10
+          }
+        },
+        # 按doc_count排序
+        "top_bucket_sort":{
+          "bucket_sort": {
+            "sort": [
+              { "_count": { "order": "desc" } }
+              ]
           }
         }
       }

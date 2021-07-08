@@ -133,55 +133,67 @@ nohup python3 -m elastalert.elastalert --config ./config.yaml --rule ./your_rule
 
 ### Rule Types
 
-* frequency：频率；在给定时间范围内至少有一定数量的事件时，此规则匹配
-  * num_events：触发警报的事件数
-  * timeframe：事件数必须发生在的此时间段内，触发报警
-  * use_count_query：使用count API轮询Elasticsearch
-* any：任意；过滤器每次匹配都会警报
-* blacklist：黑名单；将对照黑名单检查某个字段，如果该字段在黑名单中，则进行匹配
-  * compare_key： 用于与黑名单进行比较的字段的名称，如果字段为null，那么这些事件将被忽略
-  * blacklist：黑名单值的列表
-* whitelist：白名单；与黑名单类似
-* change：变动；将监视特定字段，并在该字段发生更改时进行匹配
-  * compare_key：要监视更改的字段的名称
-  * ignore_null：如果为true，则没有compare_key字段的事件将不会计为已更改
-  * query_key：对每个query_key的唯一值分别计数。
-  * timeframe: 可选；时间范围，两次更改之间的最长时间。在这段时间之后，ElastAlert将忘记compare_key字段的旧值
-* spike：突刺；当给定时间段内的事件量是前一时间段内的spike_height倍数时，此规则匹配
-  * spike_height：上一个时间范围内的事件数量与前一个时间范围内的事件数量之比，匹配时触发警报
-  * spike_type：‘up’, ‘down’ or ‘both’
-  * timeframe：当前窗口和参考窗口的时间范围
-  * field_value：可选；使用文档中字段的值而不是匹配文档的数量
-  * threshold_ref：参考窗口中必须存在的最少数量的事件才能触发警报
-  * threshold_cur：当前窗口中必须存在的最小数量的事件才能触发警报
-* flatline：阈值；当事件总数在一个时间段内低于给定阈值时，此规则匹配
-  * threshold：不触发警报的最小事件数
-  * timeframe：时间范围
-* new_term：新值；当新值出现在以前从未见过的字段中时，此规则匹配
-  * fields：监视字段列表
-* cardinality：基数阈值；当时间范围内某个字段的唯一值的总数大于或小于阈值时，此规则匹配
-  * cardinality_field：要计算基数的字段
-  * timeframe：时间范围
-* metric_aggregation：当计算窗口中的度量值高于或低于阈值时，此规则匹配
-  * metric_agg_key：指标字段
-  * metric_agg_type：指标类型，‘min’, ‘max’, ‘avg’, ‘sum’, ‘cardinality’, ‘value_count’
-  * max_threshold：最大阈值
-  * min_threshold：最小阈值
-* spike_aggregation：当计算窗口中某个指标的值是spike_height乘以比前一个时间段大或小时，该规则匹配
-  * metric_agg_key：指标字段
-  * metric_agg_type：指标类型，‘min’, ‘max’, ‘avg’, ‘sum’, ‘cardinality’, ‘value_count’
-  * spike_height：上一个时间范围内的事件数量与前一个时间范围内的事件数量之比，匹配时触发警报
-  * spike_type：‘up’, ‘down’ or ‘both’
-  * buffer_time：当前窗口和参考窗口的时间范围
-  * query_key：按字段分组
-  * metric_agg_script：计算指标脚本
-  * threshold_ref：参考窗口中用于触发警报的指标的最小值
-  * threshold_cur：当前窗口中用于触发警报的指标的最小值
-  * min_doc_count：当前窗口中触发警报所需的最小事件数
-* percentage_match：当计算窗口内匹配桶中文档的百分比高于或低于阈值时，此规则匹配
-  * match_bucket_filter：匹配桶定义了一个过滤器
-  * min_percentage：匹配文档的百分比小于此数字，则会触发警报
-  * max_percentage：匹配文档的百分比大于此数字，则会触发警报
+frequency：频率；在给定时间范围内至少有一定数量的事件时，此规则匹配
+* num_events：触发警报的事件数
+* timeframe：事件数必须发生在的此时间段内，触发报警
+* use_count_query：使用count API轮询Elasticsearch
+
+any：任意；过滤器每次匹配都会警报
+
+blacklist：黑名单；将对照黑名单检查某个字段，如果该字段在黑名单中，则进行匹配
+* compare_key： 用于与黑名单进行比较的字段的名称，如果字段为null，那么这些事件将被忽略
+* blacklist：黑名单值的列表
+
+whitelist：白名单；与黑名单类似
+
+change：变动；将监视特定字段，并在该字段发生更改时进行匹配
+* compare_key：要监视更改的字段的名称
+* ignore_null：如果为true，则没有compare_key字段的事件将不会计为已更改
+* query_key：对每个query_key的唯一值分别计数。
+* timeframe: 可选；时间范围，两次更改之间的最长时间。在这段时间之后，ElastAlert将忘记compare_key字段的旧值
+
+spike：突刺；当给定时间段内的事件量是前一时间段内的spike_height倍数时，此规则匹配
+* spike_height：上一个时间范围内的事件数量与前一个时间范围内的事件数量之比，匹配时触发警报
+* spike_type：‘up’, ‘down’ or ‘both’
+* timeframe：当前窗口和参考窗口的时间范围
+* field_value：可选；使用文档中字段的值而不是匹配文档的数量
+* threshold_ref：参考窗口中必须存在的最少数量的事件才能触发警报
+* threshold_cur：当前窗口中必须存在的最小数量的事件才能触发警报
+
+flatline：阈值；当事件总数在一个时间段内低于给定阈值时，此规则匹配
+* threshold：不触发警报的最小事件数
+* timeframe：时间范围
+
+new_term：新值；当新值出现在以前从未见过的字段中时，此规则匹配
+
+* fields：监视字段列表
+
+cardinality：基数阈值；当时间范围内某个字段的唯一值的总数大于或小于阈值时，此规则匹配
+* cardinality_field：要计算基数的字段
+* timeframe：时间范围
+
+metric_aggregation：当计算窗口中的度量值高于或低于阈值时，此规则匹配
+* metric_agg_key：指标字段
+* metric_agg_type：指标类型，‘min’, ‘max’, ‘avg’, ‘sum’, ‘cardinality’, ‘value_count’
+* max_threshold：最大阈值
+* min_threshold：最小阈值
+
+spike_aggregation：当计算窗口中某个指标的值是spike_height乘以比前一个时间段大或小时，该规则匹配
+* metric_agg_key：指标字段
+* metric_agg_type：指标类型，‘min’, ‘max’, ‘avg’, ‘sum’, ‘cardinality’, ‘value_count’
+* spike_height：上一个时间范围内的事件数量与前一个时间范围内的事件数量之比，匹配时触发警报
+* spike_type：‘up’, ‘down’ or ‘both’
+* buffer_time：当前窗口和参考窗口的时间范围
+* query_key：按字段分组
+* metric_agg_script：计算指标脚本
+* threshold_ref：参考窗口中用于触发警报的指标的最小值
+* threshold_cur：当前窗口中用于触发警报的指标的最小值
+* min_doc_count：当前窗口中触发警报所需的最小事件数
+
+percentage_match：当计算窗口内匹配桶中文档的百分比高于或低于阈值时，此规则匹配
+* match_bucket_filter：匹配桶定义了一个过滤器
+* min_percentage：匹配文档的百分比小于此数字，则会触发警报
+* max_percentage：匹配文档的百分比大于此数字，则会触发警报
 
 ![IMAGE](https://gitee.com/lights8080/lights8080-oss/raw/master/2021/06/xZ1jbI.jpg)
 

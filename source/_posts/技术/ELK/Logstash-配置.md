@@ -82,17 +82,14 @@ and, or, nand, xor
 ### Filter plugins
 * aggregate
 聚合属于同一任务的多个事件（通常是日志行）中的可用信息，最后将聚合的信息推送到最终任务事件中
-
 * clone
 克隆事件，原始事件保持不变。新事件作为正常的事件插入到管道中，并从生成事件的过滤器开始继续执行。
-
 * date
 解析字段中的日期，然后使用该日期或时间戳作为事件的Logstash的时间戳
-
 * Grok filter plugin
 解析任何文本并将其结构化。适用于文本的结构是逐行变化。%{SYNTAX:SEMANTIC}
 [grok-patterns](https://github.com/logstash-plugins/logstash-patterns-core/blob/3cdd3f6c81/patterns/grok-patterns)
-
+[grokdebug](http://grokdebug.herokuapp.com/)
 * Dissect filter plugin
 适用于界定符拆分，不使用正则表达式，而且速度非常快。%{id->} %{function} %{+ts}
 1. `%{+ts}`：表示前面已经捕获到一个ts字段了，而这次捕获的内容，自动添补到之前ts字段内容的后面
