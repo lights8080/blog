@@ -54,7 +54,7 @@ for LINE in $ORDERS_RESULT
 do
   if [ 'order_no' != "$LINE" ];then
     run_c=$run_c+1
-    orderdetail_result=$(curl -XPOST -H "Content-Type: application/json" -H "username: _system_sync" -H "Authorization: fbIywHBF4Y0uaX5xDLReM5kypLrxP2pY" -d '{"orderNo":"'$LINE'"}' http://10.88.2.1:80/u2c-order-service/orderDetail -s)
+    orderdetail_result=$(curl -XPOST -H "Content-Type: application/json" -H "username: _system_sync" -H "Authorization: " -d '{"orderNo":"'$LINE'"}' http://10.88.2.1:80/u2c-order-service/orderDetail -s)
     if [[ $orderdetail_result  =~ $successStr ]];then
       echo "$orderdetail_result" > $es_script_path/.data_$file_suffix
       cat $es_script_path/.data_$file_suffix |jq '.orderInfo' -c >$es_script_path/.data_1_$file_suffix

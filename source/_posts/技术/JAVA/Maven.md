@@ -8,6 +8,8 @@ tags:
 - Maven
 ---
 
+依赖范围、依赖原则、Maven插件和生命周期、插件说明、Maven模板、Maven生成archetype项目
+
 <!-- more -->
 
 ## 依赖范围
@@ -262,4 +264,61 @@ mvn命令执行过程：
      <skipTests>true</skipTests>
     </configuration>
    </plugin>
+```
+
+## Maven模板
+1. mvn archetype:crawl （创建本地模板库）
+
+2. mvn archetype:generate（使用模板创建项目）
+```
+# groupId、artifactId、version - 为新建项目的定位信息
+# archetypeGroupId、archetypeArtifactId、archetypeVersion - 为模板项目的定位信息
+# archetypeCatalog=local 从本地仓库选取模板项目
+mvn archetype:generate \
+-DgroupId=com.lights \
+-DartifactId=lights-order \
+-Dversion=2.0.0 \
+-DarchetypeCatalog=local \
+-DarchetypeGroupId=com.lights \
+-DarchetypeArtifactId=lights-springcloud-archetype \
+-DarchetypeVersion=2.0.0 \
+-DinteractiveMode=false
+```
+
+## Maven生成archetype项目
+
+1. 进入工程目录执行命令： mvn archetype:create-from-project
+2. 进入target/generated-sources/archetype
+3. 编辑pom.xml，添加远程发布的Nexus地址
+4. 执行命令：mvn deploy
+5. 命令创建项目：mvn archetype:generate -DarchetypeCatalog=local
+
+1. 前提配置~/.m2/settings.xml
+```xml
+    <server>
+      <id>releases</id>
+      <username>admin</username>
+      <password>admin1212</password>
+    </server>
+    <server>
+      <id>snapshots</id>
+      <username>admin</username>
+      <password>admin1212</password>
+    </server>
+```
+
+2. 前提配置pom.xml
+```xml
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>Internal Releases</name>
+            <url>http://192.168.1.23:8081/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Internal Releases</name>
+            <url>http://192.168.1.23:8081/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 ```
