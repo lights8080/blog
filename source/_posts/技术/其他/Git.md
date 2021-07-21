@@ -11,6 +11,16 @@ Git
 
 <!-- more -->
 
+https://codewords.recurse.com/issues/two/git-from-the-inside-out
+这篇文章解释了 Git 是如何工作的。它假设您对 Git 足够了解，可以使用它来对您的项目进行版本控制。
+
+https://blog.csdn.net/qq_32452623/article/details/78905181
+Git三大特色之WorkFlow(工作流)
+
+https://nvie.com/posts/a-successful-git-branching-model/
+A successful Git branching model
+
+
 ## 分支管理
 ![](https://gitee.com/lights8080/lights8080-oss/raw/master/2021/07/unknown.jpg)
 Production 分支
