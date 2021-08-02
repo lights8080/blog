@@ -3,7 +3,6 @@ title: "JAVA面向对象编程思想"
 date: 2021-06-24
 categories:
 - 技术
-- JAVA
 tags:
 - JAVA
 - 编程思想

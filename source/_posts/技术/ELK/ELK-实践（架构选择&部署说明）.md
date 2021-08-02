@@ -3,9 +3,7 @@ title: ELK-实践（架构选择&部署说明）
 date: 2021-05-10
 categories:
 - 技术
-- ELK
 tags:
-- 技术
 - ELK
 ---
 

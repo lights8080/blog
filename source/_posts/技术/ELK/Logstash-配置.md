@@ -3,9 +3,7 @@ title: Logstash-配置
 date: 2021-03-22
 categories:
 - 技术
-- ELK
 tags:
-- 技术
 - ELK
 - Logstash
 ---

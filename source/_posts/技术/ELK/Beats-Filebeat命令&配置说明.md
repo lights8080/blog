@@ -3,9 +3,7 @@ title: Beats-Filebeat命令&配置说明
 date: 2021-04-29
 categories:
 - 技术
-- ELK
 tags:
-- 技术
 - ELK
 - Filebeat
 ---

@@ -3,9 +3,7 @@ title: "Linux 2>&1"
 date: 2021-07-07
 categories:
 - 技术
-- Linux
 tags:
-- 技术
 - Linux
 ---
 

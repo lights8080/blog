@@ -5,6 +5,7 @@ categories:
 - 技术
 tags:
 - Python
+- for Mac
 ---
 pyenv for mac安装说明
 <!-- more -->

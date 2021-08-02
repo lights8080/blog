@@ -3,10 +3,9 @@ title: "同步订单到ES"
 date: 2021-07-07
 categories:
 - 技术
-- 脚本
 tags:
 - 脚本
-- Shell
+- shell
 ---
 
 从Mysql->logstash->Elasticsearch。支持时间字段时区设置，防止重复执行，错误订单记录。

@@ -3,9 +3,7 @@ title: Elasticsearch-文本分析（Text Analysis）
 date: 2021-04-01
 categories:
 - 技术
-- ELK
 tags:
-- 技术
 - ELK
 - Elasticsearch
 ---

@@ -2,8 +2,9 @@
 title: "Apache common-pool"
 date: 2021-07-09
 categories:
-- Java
+- 技术
 tags:
+- 线程池
 - Java
 ---
 

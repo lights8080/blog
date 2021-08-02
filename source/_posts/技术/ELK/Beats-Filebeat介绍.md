@@ -3,9 +3,7 @@ title: Beats-Filebeat介绍
 date: 2021-04-28
 categories:
 - 技术
-- ELK
 tags:
-- 技术
 - ELK
 - Filebeat
 ---

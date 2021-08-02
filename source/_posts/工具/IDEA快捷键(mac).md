@@ -2,9 +2,10 @@
 title: "IDEA快捷键(Mac)"
 date: 2021-07-09
 categories:
-- 效率
+- 工具
 tags:
 - IDEA
+- for Mac
 ---
 
 IDEA快捷键(Mac)

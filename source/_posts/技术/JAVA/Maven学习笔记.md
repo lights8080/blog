@@ -1,10 +1,10 @@
 ---
-title: "Maven"
+title: "Maven学习笔记"
 date: 2021-06-24
 categories:
 - 技术
-- Java
 tags:
+- Java
 - Maven
 ---
 

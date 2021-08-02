@@ -3,9 +3,7 @@ title: ELK-实践（业务框架&业务配置）
 date: 2021-06-04
 categories:
 - 技术
-- ELK
 tags:
-- 技术
 - ELK
 ---
 

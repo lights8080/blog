@@ -3,9 +3,7 @@ title: Elasticsearch-聚合（Aggregations）
 date: 2021-04-25
 categories:
 - 技术
-- ELK
 tags:
-- 技术
 - ELK
 - Elasticsearch
 ---

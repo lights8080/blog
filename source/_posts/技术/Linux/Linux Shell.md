@@ -3,10 +3,9 @@ title: "Linux Shell"
 date: 2021-06-18
 categories:
 - 技术
-- Linux
 tags:
-- 技术
 - Linux
+- shell
 ---
 
 shell介绍和shell环境

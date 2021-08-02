@@ -3,9 +3,8 @@ title: "ElastAlert-配置"
 date: 2021-06-01
 categories:
 - 技术
-- ELK
 tags:
-- 技术
+- ElastAlert
 - ELK
 ---
 

@@ -3,9 +3,7 @@ title: "OOM killer及Overcommit"
 date: 2021-05-19
 categories:
 - 技术
-- Linux
 tags:
-- 技术
 - Linux
 ---
 
