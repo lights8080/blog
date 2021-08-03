@@ -1,11 +1,12 @@
 ---
 title: Elasticsearch-文本分析（Text Analysis）
-date: 2021-04-01
 categories:
-- 技术
+  - 技术
 tags:
-- ELK
-- Elasticsearch
+  - ELK
+  - Elasticsearch
+abbrlink: ffcd0ce9
+date: 2021-04-01 00:00:00
 ---
 
 文本分析使Elasticsearch能够执行全文搜索，其中搜索返回所有相关结果，而不仅仅是精确匹配。

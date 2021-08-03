@@ -1,11 +1,12 @@
 ---
 title: 生产环境的一次JVM调优过程
-date: 2021-02-05
 categories:
-- 技术
+  - 技术
 tags:
-- JVM
-- 线上问题
+  - JVM
+  - 线上问题
+abbrlink: f53d0b8c
+date: 2021-02-05 00:00:00
 ---
 
 > JVM调优过程。问题背景、分析过程、优化思路

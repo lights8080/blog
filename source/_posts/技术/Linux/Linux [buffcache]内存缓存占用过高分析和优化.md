@@ -1,11 +1,12 @@
 ---
-title: "Linux [buff/cache]内存缓存占用过高分析和优化"
-date: 2021-05-19
+title: 'Linux [buff/cache]内存缓存占用过高分析和优化'
 categories:
-- 技术
+  - 技术
 tags:
-- Linux
-- 线上问题
+  - Linux
+  - 线上问题
+abbrlink: f7c987f0
+date: 2021-05-19 00:00:00
 ---
 
 > buff/cache过高问题解决过程。问题现场、问题分析、如何解决、扩展知识

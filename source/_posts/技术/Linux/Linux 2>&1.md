@@ -1,10 +1,11 @@
 ---
-title: "Linux 2>&1"
-date: 2021-07-07
+title: Linux 2>&1
 categories:
-- 技术
+  - 技术
 tags:
-- Linux
+  - Linux
+abbrlink: 2c9a2ea4
+date: 2021-07-07 00:00:00
 ---
 
 2>&1说明

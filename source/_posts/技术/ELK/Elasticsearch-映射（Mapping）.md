@@ -1,11 +1,12 @@
 ---
 title: Elasticsearch-映射（Mapping）
-date: 2021-04-01
 categories:
-- 技术
+  - 技术
 tags:
-- ELK
-- Elasticsearch
+  - ELK
+  - Elasticsearch
+abbrlink: 5217ff46
+date: 2021-04-01 00:00:00
 ---
 
 > Elasticsearch映射介绍，包括动态映射、显式映射、字段数据类型、映射参数、映射限制设置。

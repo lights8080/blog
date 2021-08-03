@@ -1,11 +1,12 @@
 ---
 title: Elasticsearch-搜索（Search-DSL）
-date: 2021-04-08
 categories:
-- 技术
+  - 技术
 tags:
-- ELK
-- Elasticsearch
+  - ELK
+  - Elasticsearch
+abbrlink: 12e2da86
+date: 2021-04-08 00:00:00
 ---
 
 > Elasticsearch介绍查询搜索请求包含哪些选项，并介绍其中的Query DSL。包括语法说明、查询和过滤上下文、复合查询等和查询示例。

@@ -1,11 +1,12 @@
 ---
 title: Elasticsearch-介绍
-date: 2021-04-01
 categories:
-- 技术
+  - 技术
 tags:
-- ELK
-- Elasticsearch
+  - ELK
+  - Elasticsearch
+abbrlink: 9e5edb25
+date: 2021-04-01 00:00:00
 ---
 
 > Elasticsearch介绍，包括文档与索引、倒排索引、搜索和分析、可伸缩和弹性（节点、分片、跨集群复制）、常用场景。

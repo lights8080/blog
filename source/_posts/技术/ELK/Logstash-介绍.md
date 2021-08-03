@@ -1,11 +1,12 @@
 ---
 title: Logstash-介绍
-date: 2021-03-19
 categories:
-- 技术
+  - 技术
 tags:
-- ELK
-- Logstash
+  - ELK
+  - Logstash
+abbrlink: 5e5b28be
+date: 2021-03-19 00:00:00
 ---
 
 > 本文内容是通过官网学习Logstash的一个总结，阅读本文可以对Logstash有个整体的认识。

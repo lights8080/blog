@@ -1,11 +1,12 @@
 ---
 title: Elasticsearch-数据迁移
-date: 2021-06-03
 categories:
-- 技术
+  - 技术
 tags:
-- ELK
-- Elasticsearch
+  - ELK
+  - Elasticsearch
+abbrlink: eaaae947
+date: 2021-06-03 00:00:00
 ---
 
 ## Reindex数据迁移

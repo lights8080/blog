@@ -1,11 +1,12 @@
 ---
 title: Elasticsearch-索引（Index）
-date: 2021-04-07
 categories:
-- 技术
+  - 技术
 tags:
-- ELK
-- Elasticsearch
+  - ELK
+  - Elasticsearch
+abbrlink: cae9608
+date: 2021-04-07 00:00:00
 ---
 
 > Elasticsearch索引介绍，包括索引设置、索引模板、索引生命周期管理、翻滚索引、索引别名、滚动索引。

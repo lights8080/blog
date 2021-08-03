@@ -1,11 +1,12 @@
 ---
 title: Elasticsearch-安全特性（Security）
-date: 2021-04-27
 categories:
-- 技术
+  - 技术
 tags:
-- ELK
-- Elasticsearch
+  - ELK
+  - Elasticsearch
+abbrlink: da8f862e
+date: 2021-04-27 00:00:00
 ---
 
 > Elasticsearch安全特性，介绍加密通讯的基本原理、开启安全特性的操作步骤、如何生成节点证书、用户认证和相关概念等。

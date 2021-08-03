@@ -1,12 +1,13 @@
 ---
-title: "凤凰架构-RPC vs REST"
-date: 2021-07-26
+title: 凤凰架构-RPC vs REST
 categories:
-- 读书
-- 技术
+  - 读书
+  - 技术
 tags:
-- 凤凰架构
-- RPC
+  - 凤凰架构
+  - RPC
+abbrlink: dcd4b9cd
+date: 2021-07-26 00:00:00
 ---
 
 周志明《凤凰架构：构建可靠的大型分布式系统》

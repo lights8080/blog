@@ -1,11 +1,12 @@
 ---
 title: Beats-Filebeat命令&配置说明
-date: 2021-04-29
 categories:
-- 技术
+  - 技术
 tags:
-- ELK
-- Filebeat
+  - ELK
+  - Filebeat
+abbrlink: 85a42e72
+date: 2021-04-29 00:00:00
 ---
 
 > 介绍Filebeat命令、配置以及最佳实战。

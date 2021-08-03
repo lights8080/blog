@@ -1,12 +1,13 @@
 ---
-title: "NodeJs VS Nginx"
-date: 2021-06-08
+title: NodeJs VS Nginx
 categories:
-- 技术
+  - 技术
 tags:
-- 前端
-- NodeJs
-- Nginx
+  - 前端
+  - NodeJs
+  - Nginx
+abbrlink: da8d67f4
+date: 2021-06-08 00:00:00
 ---
 前端项目动态应用和静态应用的区别，有了 Vue + Nginx，为什么还要 Node？
 <!-- more -->

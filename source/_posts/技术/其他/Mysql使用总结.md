@@ -1,10 +1,11 @@
 ---
-title: "Mysql使用总结"
-date: 2021-06-24
+title: Mysql使用总结
 categories:
-- 技术
+  - 技术
 tags:
-- Mysql
+  - Mysql
+abbrlink: 28b8e966
+date: 2021-06-24 00:00:00
 ---
 
 新建用户及授权、性能指标、数据库容量、导入导出、存储过程和事件、sql总结

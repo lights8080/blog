@@ -1,11 +1,12 @@
 ---
 title: Logstash-配置
-date: 2021-03-22
 categories:
-- 技术
+  - 技术
 tags:
-- ELK
-- Logstash
+  - ELK
+  - Logstash
+abbrlink: 2d82b4af
+date: 2021-03-22 00:00:00
 ---
 
 > Logstash配置介绍、插件说明、配置说明、高级配置、命令说明

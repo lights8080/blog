@@ -1,10 +1,11 @@
 ---
-title: "Git学习笔记"
-date: 2021-07-08
+title: Git学习笔记
 categories:
-- 技术
+  - 技术
 tags:
-- Git
+  - Git
+abbrlink: a91eaa72
+date: 2021-07-08 00:00:00
 ---
 
 Git

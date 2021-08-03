@@ -1,11 +1,12 @@
 ---
-title: "pyenv for Mac"
-date: 2021-06-18
+title: pyenv for Mac
 categories:
-- 技术
+  - 技术
 tags:
-- Python
-- for Mac
+  - Python
+  - for Mac
+abbrlink: 7afafb85
+date: 2021-06-18 00:00:00
 ---
 pyenv for mac安装说明
 <!-- more -->

@@ -1,11 +1,12 @@
 ---
-title: "ElastAlert-实践"
-date: 2021-06-17
+title: ElastAlert-实践
 categories:
-- 技术
+  - 技术
 tags:
-- ElastAlert
-- ELK
+  - ElastAlert
+  - ELK
+abbrlink: 147ee709
+date: 2021-06-17 00:00:00
 ---
 
 <!-- more -->

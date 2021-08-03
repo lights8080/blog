@@ -1,11 +1,12 @@
 ---
-title: "ElastAlert-介绍"
-date: 2021-05-19
+title: ElastAlert-介绍
 categories:
-- 技术
+  - 技术
 tags:
-- ElastAlert
-- ELK
+  - ElastAlert
+  - ELK
+abbrlink: 9f0e3b5c
+date: 2021-05-19 00:00:00
 ---
 
 <!-- more -->

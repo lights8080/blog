@@ -1,10 +1,11 @@
 ---
-title: "OOM killer及Overcommit"
-date: 2021-05-19
+title: OOM killer及Overcommit
 categories:
-- 技术
+  - 技术
 tags:
-- Linux
+  - Linux
+abbrlink: 49aea59e
+date: 2021-05-19 00:00:00
 ---
 
 > OOM killer(Out Of Memory killer)是Linux内核的一种内存管理机制，该机制在系统物理内存不足时，选择性杀死一些进程以释放内存，以使系统继续运行。

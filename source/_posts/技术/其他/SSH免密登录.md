@@ -1,10 +1,11 @@
 ---
-title: "SSH免密登录"
-date: 2021-07-09
+title: SSH免密登录
 categories:
-- 技术
+  - 技术
 tags:
-- SSH
+  - SSH
+abbrlink: baa1a241
+date: 2021-07-09 00:00:00
 ---
 
 SSH免密码登录

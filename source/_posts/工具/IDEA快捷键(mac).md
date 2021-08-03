@@ -1,11 +1,12 @@
 ---
-title: "IDEA快捷键(Mac)"
-date: 2021-07-09
+title: IDEA快捷键(Mac)
 categories:
-- 工具
+  - 工具
 tags:
-- IDEA
-- for Mac
+  - IDEA
+  - for Mac
+abbrlink: a73ed2ff
+date: 2021-07-09 00:00:00
 ---
 
 IDEA快捷键(Mac)

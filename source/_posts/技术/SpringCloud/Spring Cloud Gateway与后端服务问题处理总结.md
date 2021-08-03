@@ -1,11 +1,12 @@
 ---
-title: "Spring Cloud Gateway与后端服务问题处理总结"
-date: 2021-05-19
+title: Spring Cloud Gateway与后端服务问题处理总结
 categories:
-- 技术
+  - 技术
 tags:
-- SpringCloud
-- 线上问题
+  - SpringCloud
+  - 线上问题
+abbrlink: 3336a7cf
+date: 2021-05-19 00:00:00
 ---
 
 > Spring Cloud Gateway相关问题分析、解决思路的过程。

@@ -1,11 +1,12 @@
 ---
-title: "ElastAlert-核心逻辑流程及源码解析"
-date: 2021-06-10
+title: ElastAlert-核心逻辑流程及源码解析
 categories:
-- 技术
+  - 技术
 tags:
-- ELK
-- ElastAlert
+  - ELK
+  - ElastAlert
+abbrlink: 8fb14f6e
+date: 2021-06-10 00:00:00
 ---
 
 1. ElastAlert核心逻辑流程及源码解析

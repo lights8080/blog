@@ -1,10 +1,11 @@
 ---
-title: "Linux使用总结"
-date: 2021-06-24
+title: Linux使用总结
 categories:
-- 技术
+  - 技术
 tags:
-- Linux
+  - Linux
+abbrlink: 9c47b2af
+date: 2021-06-24 00:00:00
 ---
 
 

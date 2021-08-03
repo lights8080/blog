@@ -1,11 +1,12 @@
 ---
 title: Elasticsearch-配置及系统配置说明
-date: 2021-06-03
 categories:
-- 技术
+  - 技术
 tags:
-- ELK
-- Elasticsearch
+  - ELK
+  - Elasticsearch
+abbrlink: 1130cce3
+date: 2021-06-03 00:00:00
 ---
 
 系统配置、Elasticsearch配置说明

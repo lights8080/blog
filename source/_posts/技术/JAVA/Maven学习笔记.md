@@ -1,11 +1,12 @@
 ---
-title: "Maven学习笔记"
-date: 2021-06-24
+title: Maven学习笔记
 categories:
-- 技术
+  - 技术
 tags:
-- Java
-- Maven
+  - Java
+  - Maven
+abbrlink: be02a930
+date: 2021-06-24 00:00:00
 ---
 
 依赖范围、依赖原则、Maven插件和生命周期、插件说明、Maven模板、Maven生成archetype项目

@@ -1,10 +1,11 @@
 ---
 title: ELK-实践（业务框架&业务配置）
-date: 2021-06-04
 categories:
-- 技术
+  - 技术
 tags:
-- ELK
+  - ELK
+abbrlink: bd7a66cd
+date: 2021-06-04 00:00:00
 ---
 
 > 介绍基于业务的数据模型框架和业务配置（Elasticsearch的映射和索引、Logstash配置管理、Filebeat规则管理、同步脚本等）。

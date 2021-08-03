@@ -1,11 +1,12 @@
 ---
-title: "ElastAlert-配置"
-date: 2021-06-01
+title: ElastAlert-配置
 categories:
-- 技术
+  - 技术
 tags:
-- ElastAlert
-- ELK
+  - ElastAlert
+  - ELK
+abbrlink: ecd7a74d
+date: 2021-06-01 00:00:00
 ---
 
 全局配置和规则配置说明

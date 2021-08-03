@@ -1,10 +1,11 @@
 ---
 title: ELK-合集
-date: 2021-06-07
 categories:
-- 技术
+  - 技术
 tags:
-- ELK
+  - ELK
+abbrlink: f61d7f78
+date: 2021-06-07 00:00:00
 ---
 
 ELK文章合集，《Elastic Stack 实战手册》

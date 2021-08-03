@@ -1,11 +1,12 @@
 ---
-title: "Apache common-pool"
-date: 2021-07-09
+title: Apache common-pool
 categories:
-- 技术
+  - 技术
 tags:
-- 线程池
-- Java
+  - 线程池
+  - Java
+abbrlink: d1ef64cd
+date: 2021-07-09 00:00:00
 ---
 
 对象池介绍

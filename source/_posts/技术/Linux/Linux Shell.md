@@ -1,11 +1,12 @@
 ---
-title: "Linux Shell"
-date: 2021-06-18
+title: Linux Shell
 categories:
-- 技术
+  - 技术
 tags:
-- Linux
-- shell
+  - Linux
+  - shell
+abbrlink: 706c2122
+date: 2021-06-18 00:00:00
 ---
 
 shell介绍和shell环境

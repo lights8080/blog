@@ -1,11 +1,12 @@
 ---
 title: Beats-Filebeat介绍
-date: 2021-04-28
 categories:
-- 技术
+  - 技术
 tags:
-- ELK
-- Filebeat
+  - ELK
+  - Filebeat
+abbrlink: 2becaa3c
+date: 2021-04-28 00:00:00
 ---
 
 > Filebeat介绍，包括工作方式、模块、如何避免数据重复、处理器的速查表。

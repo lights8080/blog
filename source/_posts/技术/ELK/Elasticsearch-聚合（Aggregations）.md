@@ -1,11 +1,12 @@
 ---
 title: Elasticsearch-聚合（Aggregations）
-date: 2021-04-25
 categories:
-- 技术
+  - 技术
 tags:
-- ELK
-- Elasticsearch
+  - ELK
+  - Elasticsearch
+abbrlink: 9df50bf9
+date: 2021-04-25 00:00:00
 ---
 
 > Elasticsearch聚合速查表，介绍指标聚合、桶分聚合、管道聚合的分类和聚合示例。

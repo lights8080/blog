@@ -1,11 +1,12 @@
 ---
 title: Kibana-介绍
-date: 2021-04-29
 categories:
-- 技术
+  - 技术
 tags:
-- ELK
-- Kibana
+  - ELK
+  - Kibana
+abbrlink: 18d3c38b
+date: 2021-04-29 00:00:00
 ---
 
 > 介绍Kibana的侧边栏、面板类型、配置说明等。

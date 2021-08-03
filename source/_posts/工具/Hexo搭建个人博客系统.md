@@ -1,11 +1,12 @@
 ---
-title: "Hexo搭建个人博客系统"
-date: 2021-06-08
+title: Hexo搭建个人博客系统
 categories:
-- 工具
+  - 工具
 tags:
-- Hexo
-- 开源产品
+  - Hexo
+  - 开源产品
+abbrlink: 9af43afc
+date: 2021-06-08 00:00:00
 ---
 
 > 介绍基于Hexo搭建个人博客，包括评论、图床、站内搜索、字数统计、PV统计、百度统计等
@@ -93,6 +94,15 @@ plugins:
   baidu_analytics: 
 ```
 
+## 文章链接唯一化
+npm install hexo-abbrlink --save
+
+```
+permalink: post/:abbrlink.html
+abbrlink:
+  alg: crc32  # 算法：crc16(default) and crc32
+  rep: hex    # 进制：dec(default) and hex
+```
 
 ## 报错问题处理
 执行hexo server命令，报错

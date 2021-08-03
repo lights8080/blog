@@ -1,10 +1,11 @@
 ---
 title: ELK-加密通信的说明和配置教程
-date: 2021-04-28
 categories:
-- 技术
+  - 技术
 tags:
-- ELK
+  - ELK
+abbrlink: 12eaa363
+date: 2021-04-28 00:00:00
 ---
 
 
