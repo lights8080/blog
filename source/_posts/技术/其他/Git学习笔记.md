@@ -94,4 +94,11 @@ git stash    #储藏当前工作现场，等以后恢复现场继续工作
 git stash list    #查询保存的工作现场列表
 git stash apply stash@{0}    #恢复指定的stash
 
+# -----
+
+# 强行拉取远程分支覆盖本地
+$git reset --hard origin/master
+# 把本地的dev 分支强制推送到远端 master
+git push origin dev:master -f
+
 ```
