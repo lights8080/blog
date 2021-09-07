@@ -1,7 +1,7 @@
 ---
 title: 凤凰架构-RPC vs REST
 categories:
-  - 读书
+  - 读书笔记
   - 技术
 tags:
   - 凤凰架构
