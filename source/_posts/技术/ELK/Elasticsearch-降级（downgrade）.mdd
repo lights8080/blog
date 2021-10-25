@@ -20,6 +20,7 @@ Elasticsearch降级实践
 
 以我的操作环境为例：从7.13.4回退到7.11.2。
 直接启动7.11.2，报错如下：
+
 ```
 cannot downgrade a node from version [7.13.4] to version [7.11.2]
 ```
