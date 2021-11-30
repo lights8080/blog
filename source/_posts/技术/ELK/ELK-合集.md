@@ -17,6 +17,9 @@ ELK文章合集，《Elastic Stack 实战手册》
 安利一下《Elastic Stack 实战手册》早鸟版首发，这是我最近才关注到的，写的很好
 https://developer.aliyun.com/topic/elasticstack/playbook
 
+Elastic：开发者上手指南
+https://elasticstack.blog.csdn.net/article/details/102728604
+
 ## 文章合集
 
 [ELK-实践（架构选择&部署说明）](http://mp.weixin.qq.com/s?__biz=Mzg3MTMzNzM3NA==&mid=2247483825&idx=1&sn=c0ee14f7a3ba2f711e69b8b0a4404cde&chksm=ce815d40f9f6d456ef4b34fdac70983da494c6c9ae2e3ab3d8049a9f8c6546a89e295e9e158a#rd)
